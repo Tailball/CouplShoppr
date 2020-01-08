@@ -2,6 +2,9 @@
     import { onMount, afterUpdate } from 'svelte';
     import { createEventDispatcher } from 'svelte';
 
+    import Logo from './logo.svelte';
+
+
     const dispatch = createEventDispatcher();
 
     let product = '';
@@ -39,20 +42,6 @@
 
 
 <style>
-    .form {
-        width: 100%;
-        margin: 5.5vh 0;
-        
-        display: flex;
-        flex-direction: column;
-        
-        padding: 0 5vh 0 5vh;
-    }
-
-    .form-group {
-        padding: .65rem;
-    }
-
     label, input {
         font-size: .8rem;
         font-family: inherit;
@@ -81,6 +70,8 @@
 
 <form class="form"
       on:submit={onSubmitHandler}>
+
+    <Logo partOne="add" partTwo="items" />
     
     <div class="form-group fg-product">
         <label for="formproduct">Product:</label>

@@ -1,52 +1,55 @@
 <script>
-    import { onMount } from 'svelte';
-    import { getListDataFromServer } from '../data/connectionUtility';
-
+    import Logo from './logo.svelte';
     import Form from './form.svelte';
     import ShoppingListContainer from './shoppingListContainer.svelte';
 
 
-    export let showForm;
-
-    let activeList = [];
-
-
-    onMount(async () => {
-        const listData = await getListDataFromServer();
-        activeList = [...activeList, ...listData];
-    });
+    export let store;
 
 
     const onAddItemHandler = ({ detail }) => {
-        activeList = [...activeList, detail];
+        store.activeList = [
+            {
+                ...detail, 
+                checked: false
+            }, 
+            ...store.activeList
+        ];
+    }
+
+    const onDeleteItemHandler = ({ detail }) => {
+        store.activeList = store.activeList.filter(itm => itm.product !== detail.product);
+    }
+
+    const onCheckItemHandler = ({ detail }) => {
+        const item = store.activeList.find(itm => itm.product === detail.product);
+        item.checked = !item.checked;
+
+        store.activeList = [...store.activeList];
     }
 </script>
 
 
 <style>
-    .basecontainer {
-        width: 100%;
-        min-height: 100vh;
-
-        display: flex;
-        flex-direction: column;
-    }
-
-    .app-title-filler {
-        width: 100%;
-        height: 7.5vh;
-    }
 </style>
 
 
 <div class="basecontainer">
     
-    <div class="app-title-filler"> </div>
+    <div class="app-title-filler"></div>
 
-    {#if showForm}
+    {#if store.showForm}
         <Form on:form-additem={onAddItemHandler} />
     {/if}
 
-    <ShoppingListContainer data={activeList} />
+    {#if store.isLoading}
+        <div class="wrapper">
+            <Logo partOne="now" partTwo="loading" />
+        </div>
+    {:else}
+        <ShoppingListContainer data={store.activeList}
+                               on:shoppinglistcontainer-delete={onDeleteItemHandler}
+                               on:shoppinglistcontainer-check={onCheckItemHandler} />
+    {/if}
 
 </div>

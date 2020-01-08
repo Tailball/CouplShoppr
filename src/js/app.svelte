@@ -1,44 +1,40 @@
 <script>
+    import { onMount } from 'svelte';
+    import { getListDataFromServer } from './data/connectionUtility';
+
     import Logo from './components/logo.svelte';
     import BaseContainer from './components/baseContainer.svelte';
 
-    let showForm = false;
+
+    let store = {
+        showForm: false,
+        isLoading: false,
+        activeList: []
+    };
+
+
+    onMount(async () => {
+        store.isLoading = true;
+        
+        const shoppingList = await getListDataFromServer();
+        store.activeList = shoppingList;
+
+        store.isLoading = false;
+    });
+
 
     const toggleFormHandler = () => {
-        showForm = !showForm;
+        store.showForm = !store.showForm;
+    }
+
+    const newListHandler = () => {
+        store.activeList = [];
     }
 </script>
 
 
 <style>
-    .app-title {
-        background-color: rgba(150, 150, 150, .25);
-        
-        position: fixed;
-        width: 100%;
-        height: 7.5vh;
-
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-
-        box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.35);
-    }
-
-    .app-title-controls {
-        z-index: 99;
-        position: absolute;
-        right: 3vh;
-        height: 7.5vh;
-        
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .app-title-controls button {
+    button {
         width: 6.5rem;
         margin: 0 .2rem;
         height: 100%;
@@ -48,24 +44,24 @@
 
 <div class="app-header">
     <div class="app-title">
-        <Logo />
+        <Logo partOne="coupl" partTwo="shoppr" />
     </div>
 
     <div class="app-title-controls">
         
         <button on:click={toggleFormHandler}>
-            {#if showForm}
+            {#if store.showForm}
                 hide<br/>items
             {:else}
                 add<br/>items
             {/if}
         </button>
 
-        <button>
+        <button on:click={newListHandler}>
             new<br/>list
         </button>
 
     </div>
 </div>
 
-<BaseContainer showForm={showForm} />
+<BaseContainer store={store} />

@@ -1,0 +1,27 @@
+.logo, .logo span {
+    font-family: 'Roboto Condensed';
+    font-size: 2.4rem;
+}
+
+
+.logo { 
+    font-weight: 400;
+    color: rgb(60, 60, 60);
+
+
+    span { 
+        font-weight: 700; 
+        color: rgb(121, 27, 27); 
+    }
+}
+
+
+.form .logo, 
+.shoppinglistcontainer .logo {
+    margin: 1rem 0 2rem 0;
+}
+
+.basecontainer .wrapper .logo {
+    margin: 3rem auto;
+    text-align: center;
+}

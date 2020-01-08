@@ -1,0 +1,13 @@
+.basecontainer {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    
+    .app-title-filler {
+        width: 100%;
+        height: 7.5vh;
+    }
+}
