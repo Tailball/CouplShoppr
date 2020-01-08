@@ -1,0 +1,19 @@
+{
+  "name": "couplshoppr",
+  "version": "1.0.0",
+  "description": "Shopping app for couples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tailball/CouplShoppr.git"
+  },
+  "author": "Jochen Panjaer",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tailball/CouplShoppr/issues"
+  },
+  "homepage": "https://github.com/Tailball/CouplShoppr#readme"
+}
