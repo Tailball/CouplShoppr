@@ -1,0 +1,10 @@
+node_modules
+
+cache
+.cache
+
+dist
+.dist
+
+env
+.env
