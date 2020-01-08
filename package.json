@@ -4,8 +4,10 @@
   "description": "Shopping app for couples, made with the Svelte techstack",
   "author": "Jochen Panjaer",
   "license": "ISC",
+  
   "main": "index.js",
   "homepage": "https://github.com/Tailball/CouplShoppr#readme",
+
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tailball/CouplShoppr.git"
@@ -13,18 +15,25 @@
   "bugs": {
     "url": "https://github.com/Tailball/CouplShoppr/issues"
   },
+
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "parcel src/index.html",
     "build": "parcel build src/index.html"
   },
+
   "dependencies": {
     "lodash": "^4.17.15"
   },
+
   "devDependencies": {
     "parcel-bundler": "^1.12.4",
     "parcel-plugin-svelte": "^4.0.5",
     "sass": "^1.24.3",
     "svelte": "^3.16.7"
-  }
+  },
+
+  "browserslist": [
+    "last 1 chrome versions"
+  ]
 }

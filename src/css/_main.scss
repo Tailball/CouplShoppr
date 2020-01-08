@@ -1,0 +1,60 @@
+*, 
+*:hover, 
+*:active, 
+*:focus {
+    margin: 0;
+    padding: 0;
+    outline: none;
+
+    text-decoration: none;
+    font-weight: normal;
+    color: #242424;
+
+    box-sizing: border-box;
+
+    background: none;
+    border: none;
+}
+
+body {
+    width: 100vw;
+    min-height: 100vh;
+
+    font-size: 62.5%;
+
+    font-family: 'Montserrat';
+}
+
+button {
+    font-family: 'Montserrat';
+    
+    cursor: pointer;
+
+    color: #242424;
+    background-color: rgba(50, 50, 50, .1);
+    border-bottom: 3px solid rgba(50, 50, 50, 0);
+    transition: all .3s ease-in-out;
+
+    &:hover {
+        color: #cccccc;
+        background-color: rgba(50, 50, 50, .75);
+        border-bottom: 3px solid rgba(240, 25, 25, .75);
+    }
+
+    &:disabled {
+        cursor: default;
+        background-color: rgba(85, 85, 85, .1);
+        color: #9e9e9e;
+        border-bottom: 3px solid rgba(50, 50, 50, 0);
+    }
+}
+
+.form {
+    animation-name: toggleAwake;
+    animation-duration: .5s;
+}
+
+@keyframes toggleAwake {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+}
