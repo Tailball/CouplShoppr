@@ -4,10 +4,12 @@
 
     import Logo from './components/logo.svelte';
     import BaseContainer from './components/baseContainer.svelte';
+    import ConfirmDialog from './components/confirmDialog.svelte';
 
 
     let store = {
         showForm: false,
+        showConfirm: false,
         isLoading: false,
         activeList: []
     };
@@ -26,15 +28,8 @@
         store.showForm = !store.showForm;
     }
 
-    const newListHandler = async () => {
-        const results = await clearList();
-
-        if(results.success) {
-            store.activeList = [];
-        }
-        else {
-            console.error(results.reason);
-        }
+    const newListHandler = () => {
+        store.showConfirm = true;
     }
 
     const loadShoppingList = async () => {
@@ -52,6 +47,24 @@
         }
 
         setTimeout(loadShoppingList, 3000);
+    }
+
+    const onConfirmYesHandler = async () => {
+        store.showConfirm = false;
+        
+        const results = await clearList();
+
+        if(results.success) {
+            store.activeList = [];
+        }
+        else {
+            console.error(results.reason);
+        }
+    }
+
+    const onConfirmNoHandler = () => {
+        store.showConfirm = false;
+        console.log('clicked no');
     }
 </script>
 
@@ -91,6 +104,11 @@
 
         </div>
     {/if}
+
+    {#if store.showConfirm}
+        <ConfirmDialog onYesClick={onConfirmYesHandler}
+                       onNoClick={onConfirmNoHandler} />
+    {/if} 
 </div>
 
 <BaseContainer store={store} />
