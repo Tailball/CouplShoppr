@@ -54,9 +54,23 @@
 @media screen and (max-width: 850px) {
     .form {
         padding: 0;
-
+        
         button {
             width: 90%;
+        }
+    }
+}
+
+@media screen and (max-width: 670px) {
+    .form {
+        background-color: red;
+
+        label {
+            width: 7.5rem;
+
+            i {
+                margin-left: 1.2rem;
+            }
         }
     }
 }
