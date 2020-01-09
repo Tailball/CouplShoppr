@@ -11,10 +11,14 @@
     let quantity = 1;
     let description = '';
     let submit = undefined;
+    let productelement = undefined;
 
 
     onMount(() => {
         submit = document.querySelector('#form-submit');
+        productelement = document.querySelector('#formproduct');
+
+        productelement.focus();
     });
 
     afterUpdate(() => {
@@ -37,6 +41,10 @@
         product = '';
         quantity = 1;
         description = '';
+
+        if(productelement) {
+            productelement.focus();
+        }
     }
 </script>
 
@@ -64,6 +72,7 @@
         padding: .7rem;
         width: 25rem;
         margin: .7rem auto 0 auto;
+        font-size: 1rem;
     }
 </style>
 

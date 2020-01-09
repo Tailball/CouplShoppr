@@ -48,6 +48,7 @@
             margin-top: .3rem;
             font-style: italic;
             transition: all 300ms ease-in-out;
+            font-size: .7rem;
         }
     }
 
@@ -55,6 +56,11 @@
     &-controls {
         flex: 2.3;
         display: flex;
+
+        button {
+            width: 50%;
+            font-size: 1rem;
+        }
     }
 }
 
@@ -86,5 +92,36 @@
     button {
         background-color:rgb(243, 243, 243);
         color: rgb(187, 187, 187);
+    }
+}
+
+
+@media screen and (max-width: 850px) {
+    .shoppingitem {
+        height: 5rem;
+
+        &-quantity {
+            flex: .75;
+        }
+
+        &-details {
+            flex: 5;
+
+            h1 {
+                font-size: 1rem;
+            }
+
+            p {
+                font-size: .65rem;
+            }
+        }
+
+        &-controls {
+            flex: 2.5;
+
+            button {
+                font-size: .7rem;
+            }
+        }
     }
 }

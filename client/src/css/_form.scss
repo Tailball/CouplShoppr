@@ -15,3 +15,15 @@
         padding: .65rem;
     }
 }
+
+@media screen and (max-width: 1600px) {
+    .form {
+        padding: 0 0 0 5vh;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .form {
+        padding: 0;
+    }
+}

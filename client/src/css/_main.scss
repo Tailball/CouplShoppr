@@ -31,19 +31,19 @@ button, button:focus {
     cursor: pointer;
 
     color: #242424;
-    background-color: rgba(50, 50, 50, .1);
+    background-color: rgb(224, 224, 224);
     border-bottom: 3px solid rgba(50, 50, 50, 0);
     transition: all .3s ease-in-out;
 
     &:hover, 
     &:active {
-        background-color: rgba(50, 50, 50, .15);
+        background-color: rgb(202, 202, 202);
         border-bottom: 3px solid rgb(121, 27, 27);
     }
 
     &:disabled {
         cursor: default;
-        background-color: rgba(85, 85, 85, .1);
+        background-color: rgb(224, 224, 224);
         border-bottom: 3px solid rgba(50, 50, 50, 0);
     }
 }

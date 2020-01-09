@@ -25,3 +25,29 @@
     margin: 3rem auto;
     text-align: center;
 }
+
+@media screen and (max-height: 820px) {
+    .logo, .logo span {
+        font-size: 1.6rem;
+    }
+
+    .form .logo,
+    .shoppinglistcontainer .logo,
+    .basecontainer .wrapper .logo {
+        margin-top: 4rem;
+        text-align: center;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .logo, .logo span {
+        font-size: 1.6rem;
+    }
+
+    .form .logo,
+    .shoppinglistcontainer .logo,
+    .basecontainer .wrapper .logo {
+        margin-top: 4rem;
+        text-align: center;
+    }
+}

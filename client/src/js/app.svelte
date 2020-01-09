@@ -13,17 +13,10 @@
     };
 
 
-    onMount(async () => {
+    onMount(() => {
         store.isLoading = true;
         
-        const shoppingList = await getListDataFromServer();
-
-        if(shoppingList.success) {
-            store.activeList = shoppingList.data;
-        }
-        else {
-            console.error(shoppingList.reason);
-        }
+        loadShoppingList();
 
         store.isLoading = false;
     });
@@ -43,15 +36,23 @@
             console.error(results.reason);
         }
     }
+
+    const loadShoppingList = async () => {
+        const shoppingList = await getListDataFromServer();
+
+        if(shoppingList.success) {
+            store.activeList = shoppingList.data;
+        }
+        else {
+            console.error(shoppingList.reason);
+        }
+
+        setTimeout(loadShoppingList, 3000);
+    }
 </script>
 
 
 <style>
-    button {
-        width: 6.5rem;
-        margin: 0 .2rem;
-        height: 100%;
-    }
 </style>
 
 
@@ -60,18 +61,18 @@
         <Logo partOne="coupl" partTwo="shoppr" />
     </div>
 
-    <div class="app-title-controls">
+    <div class="app-controls">
         
         <button on:click={toggleFormHandler}>
             {#if store.showForm}
-                hide<br/>items
+                hide items
             {:else}
-                add<br/>items
+                add items
             {/if}
         </button>
 
         <button on:click={newListHandler}>
-            new<br/>list
+            new list
         </button>
 
     </div>

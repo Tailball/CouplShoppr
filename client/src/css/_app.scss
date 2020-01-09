@@ -4,7 +4,8 @@
 
 .app-title {
     background-color: rgba(150, 150, 150, .25);
-    
+    width: 100%;
+
     position: fixed;
     width: 100%;
     height: 7.5vh;
@@ -15,17 +16,51 @@
     align-items: center;
 
     box-shadow: 0px 2px 4px -1px rgba(0,0,0,0.35);
+}
 
+.app-controls {
+    width: 100%;
+
+    z-index: 99;
+    position: fixed;
+    top: 8vh;
+    left: 0;
+    height: 7.5vh;
     
-    &-controls {
-        z-index: 99;
-        position: fixed;
-        right: 3vh;
-        height: 7.5vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        width: 10rem;
+        margin: 0 .2rem;
+        height: 3.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-height: 820px) {
+    .app-title {
+        position: absolute;
+    }
+    
+    .app-controls {
+        top: 10vh;
+        position: absolute;
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .app-title {
+        position: absolute;
+    }
+
+    .app-controls {
+        position: absolute;
         
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
+        button {
+            width: 50%;
+        }
     }
 }

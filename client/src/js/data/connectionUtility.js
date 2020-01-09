@@ -1,6 +1,6 @@
 import Axios from 'axios';
 
-const connection = '';
+const connection = 'http://couplshoppr.herokuapp.com';
 
 
 export const getListDataFromServer = () => {

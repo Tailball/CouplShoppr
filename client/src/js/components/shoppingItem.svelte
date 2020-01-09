@@ -21,9 +21,6 @@
 
 
 <style>
-    button {
-        width: 50%;
-    }
 </style>
 
 
