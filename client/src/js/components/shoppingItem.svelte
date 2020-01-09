@@ -8,6 +8,7 @@
     export let quantity;
     export let description;
     export let checked;
+    export let createdOn;
 
 
     const onDeleteClickHandler = () => {
@@ -38,8 +39,19 @@
 
     <div class="shoppingitem-controls">
         
-        <button on:click={onDeleteClickHandler}>delete</button>
-        <button on:click={onCheckClickHandler}>check</button>
+        <button class="shoppingitem-controls-delete"
+                on:click={onDeleteClickHandler}>
+
+            <i class="far fa-trash-alt" />
+
+        </button>
+
+        <button class="shoppingitem-controls-check"
+                on:click={onCheckClickHandler}>
+
+            <i class="far fa-check-square" />
+
+        </button>
 
     </div>
 

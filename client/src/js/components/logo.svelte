@@ -1,6 +1,7 @@
 <script>
     export let partOne;
     export let partTwo;
+    export let icon;
 </script>
 
 
@@ -8,4 +9,12 @@
 </style>
 
 
-<h1 class="logo">{partOne}<span>{partTwo}</span></h1>
+<h1 class="logo">
+    
+    {#if icon}
+        <i class="{icon}" />
+    {/if}
+
+    {partOne}<span>{partTwo}</span>
+
+</h1>

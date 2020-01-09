@@ -25,7 +25,9 @@
 
 <div class="shoppinglistcontainer">
 
-    <Logo partOne="shopping" partTwo="list" />
+    <Logo partOne="shopping" 
+          partTwo="list"
+          icon="fas fa-shopping-bag" />
     
     {#each data as listitem}
         <ShoppingItem {...listitem}

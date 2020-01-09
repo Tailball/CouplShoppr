@@ -2,6 +2,7 @@ const shoppingListItem = require('../persistence/models/shoppinglistItem');
 
 
 const getShoppingList = (req, res) => {
+
     shoppingListItem.find({})
 
         .then(list => {
@@ -92,6 +93,7 @@ const checkShoppingListItem = (req, res) => {
 const addItemToShoppingList = (req, res) => {
     const newItem = {
         ...req.body,
+        createdOn: new Date(),
         checked: false,
     };
 

@@ -17,7 +17,7 @@
         store.isLoading = true;
         
         loadShoppingList();
-
+        
         store.isLoading = false;
     });
 
@@ -41,7 +41,11 @@
         const shoppingList = await getListDataFromServer();
 
         if(shoppingList.success) {
-            store.activeList = shoppingList.data;
+            const sortedShoppingList = shoppingList.data.sort((a, b) => {
+                return new Date(b.createdOn).getTime() - new Date(a.createdOn).getTime();
+            });
+
+            store.activeList = sortedShoppingList;
         }
         else {
             console.error(shoppingList.reason);
@@ -58,24 +62,35 @@
 
 <div class="app-header">
     <div class="app-title">
-        <Logo partOne="coupl" partTwo="shoppr" />
+        <Logo partOne="coupl" 
+              partTwo="shoppr" 
+              icon="fas fa-clipboard-list" />
     </div>
 
-    <div class="app-controls">
-        
-        <button on:click={toggleFormHandler}>
-            {#if store.showForm}
-                hide items
-            {:else}
-                add items
-            {/if}
-        </button>
+    
+    {#if !store.isLoading}
+        <div class="app-controls">
+            
+            <button on:click={toggleFormHandler}>
+                {#if store.showForm}
+                    <i class="far fa-minus-square" />
+                    &nbsp;
+                    hide items
+                {:else}
+                    <i class="far fa-plus-square" />
+                    &nbsp;
+                    add items
+                {/if}
+            </button>
 
-        <button on:click={newListHandler}>
-            new list
-        </button>
+            <button on:click={newListHandler}>
+                <i class="far fa-file" />
+                &nbsp;
+                new list
+            </button>
 
-    </div>
+        </div>
+    {/if}
 </div>
 
 <BaseContainer store={store} />

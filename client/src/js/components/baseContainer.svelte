@@ -58,7 +58,9 @@
 
     {#if store.isLoading}
         <div class="wrapper">
-            <Logo partOne="now" partTwo="loading" />
+            <Logo partOne="now" 
+                  partTwo="loading"
+                  icon="fas fa-spinner" />
         </div>
     {:else}
         <ShoppingListContainer data={store.activeList}

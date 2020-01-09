@@ -50,57 +50,53 @@
 
 
 <style>
-    label, input {
-        font-size: .8rem;
-        font-family: inherit;
-    }
-
-    label {
-        text-align: right;
-        margin-right: .5rem;
-        display: inline-block;
-        width: 6.5rem;
-    }
-
-    input {
-        width: calc(100% - 6.5rem - .65rem - 5vh - .3rem);
-        padding: 0 0 .3rem .3rem;
-        border-bottom: 1px solid black;
-    }
-
-    button {
-        padding: .7rem;
-        width: 25rem;
-        margin: .7rem auto 0 auto;
-        font-size: 1rem;
-    }
 </style>
 
 
 <form class="form"
       on:submit={onSubmitHandler}>
 
-    <Logo partOne="add" partTwo="items" />
+    <Logo partOne="add" 
+          partTwo="items"
+          icon="fas fa-cart-plus" />
     
     <div class="form-group fg-product">
-        <label for="formproduct">Product:</label>
+        
+        <label for="formproduct">
+            Product
+            <i class="fas fa-drumstick-bite" />
+        </label>
+
         <input id="formproduct" type="text" placeholder="add product" bind:value={product} />
     </div>
 
     <div class="form-group fg-quantity">
-        <label for="formquantity">Quantity:</label>
+        
+        <label for="formquantity">
+            Quantity
+            <i class="fab fa-slack-hash" />
+        </label>
+
         <input id="formquantity" type="number" bind:value={quantity} />
     </div>
 
     <div class="form-group fg-description">
-        <label for="formdescription">Description:</label>
+
+        <label for="formdescription">
+            Description
+            <i class="fas fa-comment" />
+        </label>
         <input id="formdescription" type="text" placeholder="add description" bind:value={description} />
     </div>
 
     <button id="form-submit"
             class="submit"
             disabled>
+
+        <i class="far fa-plus-square"></i>
+        &nbsp;
         Add
+
     </button>
 
 </form>

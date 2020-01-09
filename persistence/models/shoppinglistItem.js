@@ -19,6 +19,10 @@ const shoppinglistItemSchema = new mongoose.Schema({
         type: Boolean,
         required: true,
         default: false
+    },
+    createdOn: {
+        type: Date,
+        required: true
     }
 });
 
