@@ -1,7 +1,7 @@
 {
-  "name": "couplshoppr",
+  "name": "couplshoppr-client",
   "version": "1.0.0",
-  "description": "Shopping app for couples, made with the Svelte techstack",
+  "description": "Shopping app for couples, made with the Svelte techstack. This is the frontend application.",
   "author": "Jochen Panjaer",
   "license": "ISC",
   
