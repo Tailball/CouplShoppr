@@ -93,7 +93,7 @@
             class="submit"
             disabled>
 
-        <i class="far fa-plus-square"></i>
+        <i class="far fa-plus-square" />
         &nbsp;
         Add
 
