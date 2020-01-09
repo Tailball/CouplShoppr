@@ -20,7 +20,7 @@ const routeShoppingList = require('./routes/shoppingList');
     server.use(express.json());
 
     //Static hosting
-    server.use('/', express.static('static'));
+    server.use('/', express.static('client/dist'));
 
     //Routing
     server.use('/api/shoppinglist', routeShoppingList);
