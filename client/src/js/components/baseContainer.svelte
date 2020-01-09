@@ -3,29 +3,43 @@
     import Form from './form.svelte';
     import ShoppingListContainer from './shoppingListContainer.svelte';
 
+    import { addItem, deleteItem, checkItem } from '../data/connectionUtility';
+
 
     export let store;
 
 
-    const onAddItemHandler = ({ detail }) => {
-        store.activeList = [
-            {
-                ...detail, 
-                checked: false
-            }, 
-            ...store.activeList
-        ];
+    const onAddItemHandler = async ({ detail }) => {
+        const results = await addItem(detail);
+        
+        if(results.success) {
+            store.activeList = [{...results.data}, ...store.activeList];
+        }
+        else {
+            console.error(results.reason);
+        }
     }
 
-    const onDeleteItemHandler = ({ detail }) => {
-        store.activeList = store.activeList.filter(itm => itm.product !== detail.product);
+    const onDeleteItemHandler = async ({ detail }) => {
+        const results = await deleteItem(detail);
+        
+        if(results.success) {
+            store.activeList = store.activeList.filter(itm => itm._id !== results.data._id);
+        }
     }
 
-    const onCheckItemHandler = ({ detail }) => {
-        const item = store.activeList.find(itm => itm.product === detail.product);
-        item.checked = !item.checked;
+    const onCheckItemHandler = async ({ detail }) => {
+        const results = await checkItem(detail);
 
-        store.activeList = [...store.activeList];
+        if(results.success) {
+            const item = store.activeList.find(itm => itm._id === results.data._id);
+            item.checked = results.data.checked;
+
+            store.activeList = [...store.activeList];
+        }
+        else {
+            console.error(results.reason);
+        }
     }
 </script>
 

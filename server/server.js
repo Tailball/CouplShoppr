@@ -15,9 +15,9 @@ const routeShoppingList = require('./routes/shoppingList');
 
 
     //Middleware PRE
+    server.use(headers);
     server.use(log);
     server.use(express.json());
-    server.use(headers);
 
     //Static hosting
     server.use('/', express.static('static'));
@@ -38,7 +38,7 @@ const routeShoppingList = require('./routes/shoppingList');
         .replace('<user>', process.env.USERNAME)
         .replace('<pass>', process.env.PASS);
 
-    mongoose.connect(connectionString, { useNewUrlParser: true });
+    mongoose.connect(connectionString, { useNewUrlParser: true, useUnifiedTopology: true });
 
     const db = mongoose.connection;
     db.on('error', () => console.log('connection error'));

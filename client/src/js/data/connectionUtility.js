@@ -1,34 +1,123 @@
-const demoList = [
-    {
-        product: 'Kattenbakvulling',
-        quantity: 2,
-        description: '',
-        checked: false
-    },
-    {
-        product: 'Champignonroomsoep',
-        quantity: 1,
-        description: 'Uit blik.',
-        checked: false
-    },
-    {
-        product: 'Tonijn',
-        quantity: 1,
-        description: '200gr nodig. In eigen nat.',
-        checked: false
-    },
-    {
-        product: 'Sandwiches',
-        quantity: 2,
-        description: 'Wit',
-        checked: false
-    },
-];
+import Axios from 'axios';
+
+const connection = '';
+
 
 export const getListDataFromServer = () => {
+    const route = 'api/shoppinglist';
+
     return new Promise((res, rej) => {
-        setTimeout(() => {
-            res(demoList);
-        }, 1000);
+
+        Axios.get(`${connection}/${route}`)
+        
+            .then(results => {
+                if(results && results.data) {
+                    res(results.data);
+                }
+                else {
+                    rej({ message: 'unknown error occurred' });
+                }
+            })
+
+            .catch(err => {
+                rej(err);
+            });
+
+    });
+};
+
+
+export const addItem = item => {
+    const route = 'api/shoppinglist/add';
+
+    return new Promise((res, rej) => {
+
+        Axios.post(`${connection}/${route}`, item)
+
+            .then(results => {
+                if(results && results.data) {
+                    res(results.data);
+                }
+                else {
+                    rej({ message: 'unknown error occurred' });
+                }
+            })
+
+            .catch(err => {
+                rej(err);
+            });
+
+    });
+};
+
+
+export const deleteItem = item => {
+    const route = 'api/shoppinglist/delete';
+
+    return new Promise((res, rej) => {
+
+        Axios.post(`${connection}/${route}/${item._id}`)
+
+            .then(results => {
+                if(results && results.data) {
+                    res(results.data);
+                }
+                else {
+                    rej({ message: 'unknown error occurred' });
+                }
+            })
+
+            .catch(err => {
+                rej(err);
+            });
+
+    });
+};
+
+
+export const checkItem = item => {
+    const route = 'api/shoppinglist/check';
+
+    return new Promise((res, rej) => {
+
+        Axios.post(`${connection}/${route}/${item._id}`)
+
+            .then(results => {
+                if(results && results.data) {
+                    res(results.data);
+                }
+                else {
+                    rej({ message: 'unknown error occurred' });
+                }
+            })
+
+            .catch(err => {
+                rej(err);
+            });
+
+    });
+};
+
+
+export const clearList = () => {
+    const route = 'api/shoppinglist/clear';
+
+    return new Promise((res, rej) => {
+
+        Axios.post(`${connection}/${route}`)
+
+            .then(results => {
+                if(results && results.data) {
+                    res(results.data);
+                }
+                else {
+                    rej({ message: 'unknown error occurred' });
+                }
+            })
+
+            .catch(err => {
+                rej(err);
+            });
+
     });
 }

@@ -1,6 +1,6 @@
 <script>
     import { onMount } from 'svelte';
-    import { getListDataFromServer } from './data/connectionUtility';
+    import { getListDataFromServer, clearList } from './data/connectionUtility';
 
     import Logo from './components/logo.svelte';
     import BaseContainer from './components/baseContainer.svelte';
@@ -17,7 +17,13 @@
         store.isLoading = true;
         
         const shoppingList = await getListDataFromServer();
-        store.activeList = shoppingList;
+
+        if(shoppingList.success) {
+            store.activeList = shoppingList.data;
+        }
+        else {
+            console.error(shoppingList.reason);
+        }
 
         store.isLoading = false;
     });
@@ -27,8 +33,15 @@
         store.showForm = !store.showForm;
     }
 
-    const newListHandler = () => {
-        store.activeList = [];
+    const newListHandler = async () => {
+        const results = await clearList();
+
+        if(results.success) {
+            store.activeList = [];
+        }
+        else {
+            console.error(results.reason);
+        }
     }
 </script>
 

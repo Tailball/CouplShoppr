@@ -2,7 +2,8 @@
     import { createEventDispatcher } from 'svelte';
     const dispatch = createEventDispatcher();
 
-
+    export let _id;
+    export let __v;
     export let product;
     export let quantity;
     export let description;
@@ -10,11 +11,11 @@
 
 
     const onDeleteClickHandler = () => {
-        dispatch('shoppingitem-delete', { product });
+        dispatch('shoppingitem-delete', { _id });
     }
 
     const onCheckClickHandler = () => {
-        dispatch('shoppingitem-check', { product });
+        dispatch('shoppingitem-check', { _id });
     }
 </script>
 
