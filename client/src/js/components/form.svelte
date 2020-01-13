@@ -10,6 +10,7 @@
     let product = '';
     let quantity = 1;
     let description = '';
+    let uom = 'qty';
     let submit = undefined;
     let productelement = undefined;
 
@@ -36,7 +37,7 @@
     const onSubmitHandler = async(e) => {
         e.preventDefault();
         
-        const results = await addItemOnServer({ product, quantity, description });
+        const results = await addItemOnServer({ product, quantity, uom, description });
         
         if(results.success) {
             $shopprStore.items = [{...results.data}, ...$shopprStore.items];
@@ -85,6 +86,27 @@
         </label>
 
         <input id="formquantity" type="number" bind:value={quantity} />
+    </div>
+
+    <div class="form-group fg-uom">
+        
+        <label for="formuom">
+            UOM
+            <i class="fas fa-balance-scale" />
+        </label>
+
+        <select id="formuom" bind:value={uom}>
+            <option value="qty">quantity</option>
+            <option value="gr">gr</option>
+            <option value="kg">kg</option>
+            <option value="ml">ml</option>
+            <option value="liter">liter</option>
+            <option value="2pack">4 pack</option>
+            <option value="3pack">4 pack</option>
+            <option value="4pack">4 pack</option>
+            <option value="6pack">6 pack</option>
+            <option value="12pack">12 pack</option>
+        </select>
     </div>
 
     <div class="form-group fg-description">

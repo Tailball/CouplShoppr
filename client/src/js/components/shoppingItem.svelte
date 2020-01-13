@@ -3,12 +3,13 @@
     const dispatch = createEventDispatcher();
 
     export let _id;
-    export let __v;
     export let product;
     export let quantity;
+    export let uom;
     export let description;
     export let checked;
     export let createdOn;
+    export let __v;
 
 
     const onDeleteClickHandler = () => {
@@ -28,7 +29,8 @@
 <div class="shoppingitem {checked ? ' checked': ''}">
 
     <div class="shoppingitem-quantity">
-        <h2>{quantity}x</h2>
+        <h2>{quantity}</h2>
+        <p>{uom ? uom : 'qty'}</p>
     </div>
 
     <div class="shoppingitem-details">

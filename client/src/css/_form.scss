@@ -7,16 +7,13 @@
     
     padding: 0 1.75vw 0 1.75vw;
 
-    animation-name: toggleAwake;
-    animation-duration: .5s;
-
-    
+        
     .form-group {
         padding: .65rem;
         margin-bottom: 1rem;
     }
 
-    label, input {
+    label, input, select {
         font-size: .8rem;
         font-family: inherit;
     }
@@ -35,6 +32,13 @@
         width: calc(100% - 6.5rem - .65rem - 1.75vw - .3rem);
         padding: 0 0 .3rem .3rem;
         border-bottom: 1px solid black;
+    }
+
+    select {
+        width: calc(100% - 6.5rem - .65rem - 1.75vw - .3rem);
+        padding: 0 0 .3rem .3rem;
+        border-bottom: 1px solid black;
+        border-radius: 0;
     }
 
     button {

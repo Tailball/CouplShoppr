@@ -11,6 +11,10 @@ const shoppinglistItemSchema = new mongoose.Schema({
         required: true,
         default: 1
     },
+    uom: {
+        type: String,
+        required: true
+    },
     description: {
         type: String,
         required: false

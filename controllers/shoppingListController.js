@@ -181,11 +181,52 @@ const clearShoppingList = (req, res) => {
 }
 
 
+const updateShoppingListItem = (req, res) => {
+    shoppingListItem.findById(req.body._id)
+        
+        .then(foundResult => {
+
+            if(foundResult) {
+                foundResult.updateOne(req.body)
+                    
+                    .then(updateResult => {
+                        res.json({
+                            success: true,
+                            result: updateResult
+                        });
+                    })
+                    .catch(err => {
+                        res.status(500).json({
+                            success: false,
+                            reason: err
+                        });
+                    })
+            }
+
+            else {
+                return res.status(404).json({
+                    success: false,
+                    reason: 'resource not found'
+                });
+            }
+
+        })
+
+        .catch(err => {
+            res.status(500).json({
+                success: false,
+                reason: err
+            });
+        });
+}
+
+
 module.exports = {
     getShoppingList,
     getShoppingListItem,
     checkShoppingListItem,
     addItemToShoppingList,
     removeItemFromShoppingList,
-    clearShoppingList
+    clearShoppingList,
+    updateShoppingListItem
 };
