@@ -29,7 +29,7 @@ export const getListDataFromServer = () => {
 };
 
 
-export const addItem = item => {
+export const addItemOnServer = item => {
     const route = 'api/shoppinglist/add';
 
     return new Promise((res, rej) => {
@@ -53,7 +53,7 @@ export const addItem = item => {
 };
 
 
-export const deleteItem = item => {
+export const deleteItemFromServer = item => {
     const route = 'api/shoppinglist/delete';
 
     return new Promise((res, rej) => {
@@ -77,7 +77,7 @@ export const deleteItem = item => {
 };
 
 
-export const checkItem = item => {
+export const checkItemOnServer = item => {
     const route = 'api/shoppinglist/check';
 
     return new Promise((res, rej) => {
@@ -101,7 +101,7 @@ export const checkItem = item => {
 };
 
 
-export const clearList = () => {
+export const clearListOnServer = () => {
     const route = 'api/shoppinglist/clear';
 
     return new Promise((res, rej) => {

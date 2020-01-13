@@ -1,20 +1,35 @@
 <script>
-    import { createEventDispatcher } from 'svelte';
+    import { deleteItemFromServer, checkItemOnServer } from '../data/connectionUtility';
+    import { shopprStore } from '../data/shopprStore';
     
     import ShoppingItem from './shoppingItem.svelte';
     import Logo from './logo.svelte';
 
-    export let data = [];
-
-    const dispatch = createEventDispatcher();
-
-
-    const shoppingItemDeleteHandler = ({ detail }) => {
-        dispatch('shoppinglistcontainer-delete', detail);
+    
+    const shoppingItemDeleteHandler = async ({ detail }) => {
+        const results = await deleteItemFromServer(detail);
+        
+        if(results.success) {
+            $shopprStore.items = $shopprStore.items.filter(itm => itm._id !== results.data._id);
+        }
+        else {
+            console.error(results.reason);
+        }
     }
 
-    const shoppingItemCheckHandler = ({ detail }) => {
-        dispatch('shoppinglistcontainer-check', detail);
+
+    const shoppingItemCheckHandler = async ({ detail }) => {
+        const results = await checkItemOnServer(detail);
+
+        if(results.success) {
+            const item = $shopprStore.items.find(itm => itm._id === results.data._id);
+            item.checked = results.data.checked;
+
+            $shopprStore.items = [...$shopprStore.items];
+        }
+        else {
+            console.error(results.reason);
+        }
     }
 </script>
 
@@ -29,10 +44,10 @@
           partTwo="list"
           icon="fas fa-shopping-bag" />
     
-    {#each data as listitem}
+    {#each $shopprStore.items as listitem}
         <ShoppingItem {...listitem}
-                      on:shoppingitem-delete={shoppingItemDeleteHandler}
-                      on:shoppingitem-check={shoppingItemCheckHandler} />
+                      on:delete={shoppingItemDeleteHandler}
+                      on:check={shoppingItemCheckHandler} />
     {/each}
 
 </div>

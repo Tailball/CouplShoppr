@@ -1,71 +1,42 @@
 <script>
     import { onMount } from 'svelte';
-    import { getListDataFromServer, clearList } from './data/connectionUtility';
+    
+    import { getListDataFromServer } from './data/connectionUtility';
+    import { shopprStore } from './data/shopprStore';
 
     import Logo from './components/logo.svelte';
     import BaseContainer from './components/baseContainer.svelte';
-    import ConfirmDialog from './components/confirmDialog.svelte';
-
-
-    let store = {
-        showForm: false,
-        showConfirm: false,
-        isLoading: false,
-        activeList: []
-    };
+    import ConfirmClearListDialog from './components/confirmClearListDialog.svelte';
+    import ToggleFormButton from './components/toggleFormButton.svelte';
+    import NewListButton from './components/newListButton.svelte';
 
 
     onMount(() => {
-        store.isLoading = true;
-        
+        $shopprStore.isLoading = true;
         loadShoppingList();
-        
-        store.isLoading = false;
+        $shopprStore.isLoading = false;
     });
 
-
-    const toggleFormHandler = () => {
-        store.showForm = !store.showForm;
-    }
-
-    const newListHandler = () => {
-        store.showConfirm = true;
-    }
 
     const loadShoppingList = async () => {
         const shoppingList = await getListDataFromServer();
 
         if(shoppingList.success) {
-            const sortedShoppingList = shoppingList.data.sort((a, b) => {
-                return new Date(b.createdOn).getTime() - new Date(a.createdOn).getTime();
-            });
-
-            store.activeList = sortedShoppingList;
+            const sortedShoppingList = sortShoppingList(shoppingList.data);
+            $shopprStore.items = sortedShoppingList;
         }
         else {
             console.error(shoppingList.reason);
         }
 
-        setTimeout(loadShoppingList, 3000);
-    }
+        setTimeout(loadShoppingList, 3500);
+    };
 
-    const onConfirmYesHandler = async () => {
-        store.showConfirm = false;
-        
-        const results = await clearList();
-
-        if(results.success) {
-            store.activeList = [];
-        }
-        else {
-            console.error(results.reason);
-        }
-    }
-
-    const onConfirmNoHandler = () => {
-        store.showConfirm = false;
-        console.log('clicked no');
-    }
+    const sortShoppingList = list => {
+        return list.sort((a, b) => {
+            return new Date(b.createdOn).getTime() - new Date(a.createdOn).getTime();
+        });
+    };
 </script>
 
 
@@ -74,6 +45,7 @@
 
 
 <div class="app-header">
+    
     <div class="app-title">
         <Logo partOne="coupl" 
               partTwo="shoppr" 
@@ -81,34 +53,18 @@
     </div>
 
     
-    {#if !store.isLoading}
+    {#if !$shopprStore.isLoading}
         <div class="app-controls">
-            
-            <button on:click={toggleFormHandler}>
-                {#if store.showForm}
-                    <i class="far fa-minus-square" />
-                    &nbsp;
-                    hide items
-                {:else}
-                    <i class="far fa-plus-square" />
-                    &nbsp;
-                    add items
-                {/if}
-            </button>
-
-            <button on:click={newListHandler}>
-                <i class="far fa-file" />
-                &nbsp;
-                new list
-            </button>
-
+            <ToggleFormButton />
+            <NewListButton />
         </div>
     {/if}
 
-    {#if store.showConfirm}
-        <ConfirmDialog onYesClick={onConfirmYesHandler}
-                       onNoClick={onConfirmNoHandler} />
+
+    {#if $shopprStore.showConfirm}
+        <ConfirmClearListDialog />
     {/if} 
+    
 </div>
 
-<BaseContainer store={store} />
+<BaseContainer />

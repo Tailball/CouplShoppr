@@ -12,11 +12,11 @@
 
 
     const onDeleteClickHandler = () => {
-        dispatch('shoppingitem-delete', { _id });
+        dispatch('delete', { _id });
     }
 
     const onCheckClickHandler = () => {
-        dispatch('shoppingitem-check', { _id });
+        dispatch('check', { _id });
     }
 </script>
 
@@ -25,8 +25,7 @@
 </style>
 
 
-<div class="shoppingitem"
-     class:checked={checked}>
+<div class="shoppingitem {checked ? ' checked': ''}">
 
     <div class="shoppingitem-quantity">
         <h2>{quantity}x</h2>

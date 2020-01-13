@@ -1,11 +1,11 @@
 <script>
     import { onMount, afterUpdate } from 'svelte';
-    import { createEventDispatcher } from 'svelte';
+    
+    import { shopprStore } from '../data/shopprStore';
+    import { addItemOnServer } from '../data/connectionUtility';
 
     import Logo from './logo.svelte';
 
-
-    const dispatch = createEventDispatcher();
 
     let product = '';
     let quantity = 1;
@@ -33,10 +33,17 @@
     });
 
 
-    const onSubmitHandler = e => {
+    const onSubmitHandler = async(e) => {
         e.preventDefault();
         
-        dispatch('form-additem', { product, quantity, description });
+        const results = await addItemOnServer({ product, quantity, description });
+        
+        if(results.success) {
+            $shopprStore.items = [{...results.data}, ...$shopprStore.items];
+        }
+        else {
+            console.error(results.reason);
+        }
         
         product = '';
         quantity = 1;
