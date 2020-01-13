@@ -101,8 +101,8 @@
             <option value="kg">kg</option>
             <option value="ml">ml</option>
             <option value="liter">liter</option>
-            <option value="2pack">4 pack</option>
-            <option value="3pack">4 pack</option>
+            <option value="2pack">2 pack</option>
+            <option value="3pack">3 pack</option>
             <option value="4pack">4 pack</option>
             <option value="6pack">6 pack</option>
             <option value="12pack">12 pack</option>
